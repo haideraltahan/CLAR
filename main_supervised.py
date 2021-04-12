@@ -370,49 +370,49 @@ def main(model_name='usp_1d', max_epochs=1020, data_dir='./data', dataset='sc09'
     aug_transform = []
     if order:
         if fd:
-            aug_transform.append(add_fade)
+            aug_transform.append(transforms.RandomApply(add_fade))
             model_name = model_name + '_fd'
         if tm:
-            aug_transform.append(time_masking)
+            aug_transform.append(transforms.RandomApply(time_masking))
             model_name = model_name + '_tm'
         if tts:
-            aug_transform.append(partial(time_stret, length=length))
+            aug_transform.append(transforms.RandomApply(partial(time_stret, length=length)))
             model_name = model_name + '_tts'
         if ps:
-            aug_transform.append(pitch_shift)
+            aug_transform.append(transforms.RandomApply(pitch_shift))
             model_name = model_name + '_ps'
         if ts:
-            aug_transform.append(time_shift)
+            aug_transform.append(transforms.RandomApply(time_shift))
             model_name = model_name + '_ts'
         if wn:
-            aug_transform.append(add_white_noise)
+            aug_transform.append(transforms.RandomApply(add_white_noise))
             model_name = model_name + '_wn'
         if mx:
             m_x = Mixed_Noise(data_dir, sample_rate)
-            aug_transform.append(m_x)
+            aug_transform.append(transforms.RandomApply(m_x))
             model_name = model_name + '_mx'
     else:
         if mx:
             m_x = Mixed_Noise(data_dir, sample_rate)
-            aug_transform.append(m_x)
+            aug_transform.append(transforms.RandomApply(m_x))
             model_name = model_name + '_mx'
         if wn:
-            aug_transform.append(add_white_noise)
+            aug_transform.append(transforms.RandomApply(add_white_noise))
             model_name = model_name + '_wn'
         if ts:
-            aug_transform.append(time_shift)
+            aug_transform.append(transforms.RandomApply(time_shift))
             model_name = model_name + '_ts'
         if ps:
-            aug_transform.append(pitch_shift)
+            aug_transform.append(transforms.RandomApply(pitch_shift))
             model_name = model_name + '_ps'
         if fd:
-            aug_transform.append(add_fade)
+            aug_transform.append(transforms.RandomApply(add_fade))
             model_name = model_name + '_fd'
         if tts:
-            aug_transform.append(partial(time_stret, length=length))
+            aug_transform.append(transforms.RandomApply(partial(time_stret, length=length)))
             model_name = model_name + '_tts'
         if tm:
-            aug_transform.append(time_masking)
+            aug_transform.append(transforms.RandomApply(time_masking))
             model_name = model_name + '_tm'
 
     aug_transform = transforms.Compose(aug_transform)
